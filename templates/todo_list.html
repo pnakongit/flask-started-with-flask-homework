@@ -24,15 +24,17 @@
           </div>
         {% endfor %}
 
-        <form class="mt-4" method="POST">
+        <form class="mt-4" method="post" action="{{ url_for("todo_create") }}">
           <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Title</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Some funny name">
+            <label for="FormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="FormControlInput1" name="title"
+                   placeholder="Some funny name">
           </div>
           <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-            <textarea class="form-control" id="eFormControlTextarea1" rows="3"></textarea>
+            <label for="FormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" id="FormControlTextarea1" name="description" rows="2"></textarea>
           </div>
+          <button type="submit" class="btn btn-primary btn-sm">Create</button>
         </form>
       </div>
     </div>
