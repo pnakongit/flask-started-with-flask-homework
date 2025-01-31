@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, abort
 from flask.wrappers import Response
 
 from fake_db import fake_db
@@ -36,8 +36,15 @@ def todo_create() -> Response:
 
 
 @app.route("/tasks/<int:pk>/change_status", methods=["POST"])
-def todo_change_status(pk: int) -> str:
-    return ""
+def todo_change_status(pk: int) -> Response:
+    if request.method == "POST":
+        for task in fake_db:
+            if task["id"] == pk:
+                task["status"] = not task["status"]
+                break
+        else:
+            abort(404)
+    return redirect(url_for("todo_list"))
 
 
 @app.route("/tasks/<int:pk>/delete", methods=["POST"])
