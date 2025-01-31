@@ -10,7 +10,12 @@
             <div class="pb-3 mb-0 lh-sm border-bottom">
               <div class="d-flex justify-content-between">
                 <strong class="d-block text-gray-dark">
-                  {{ todo.id }} - {{ todo.title }}
+                  {% if todo.status %}
+                    <span class="text-success">Done</span>
+                  {% else %}
+                    <span class="text-danger">Not done</span>
+                  {% endif %}
+                   {{ todo.id }} - {{ todo.title }}
                 </strong>
                 <div>
                   <a class="badge bg-success-subtle text-danger-emphasis rounded-pill" href="#">Change status</a>
