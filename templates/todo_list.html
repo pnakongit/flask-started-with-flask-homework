@@ -15,11 +15,17 @@
                   {% else %}
                     <span class="text-danger">Not done</span>
                   {% endif %}
-                   {{ todo.id }} - {{ todo.title }}
+                  {{ todo.id }} - {{ todo.title }}
                 </strong>
                 <div>
-                  <a class="badge bg-success-subtle text-danger-emphasis rounded-pill" href="#">Change status</a>
-                  <a class="badge bg-danger-subtle text-danger-emphasis rounded-pill" href="#">Delete</a>
+                  <form class="d-inline" method="post" action="{{ url_for("todo_change_status", pk=todo.id) }}">
+                    <button type="submit" class="border-0 badge bg-success-subtle text-danger-emphasis rounded-pill">Change
+                      status
+                    </button>
+                  </form>
+                  <a class="badge bg-danger-subtle text-danger-emphasis rounded-pill" href="#">
+                    Delete
+                  </a>
                 </div>
               </div>
               <p>
