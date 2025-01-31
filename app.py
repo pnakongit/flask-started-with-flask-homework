@@ -1,4 +1,6 @@
-from flask import Flask
+from flask import Flask, render_template, url_for
+
+from fake_db import fake_db
 
 app = Flask(__name__)
 
@@ -10,7 +12,7 @@ def hello_world() -> str:
 
 @app.route("/tasks", methods=["GET"])
 def todo_list() -> str:
-    return ""
+    return render_template("todo_list.html", todo_list=fake_db)
 
 
 @app.route("/tasks/create", methods=["POST"])
