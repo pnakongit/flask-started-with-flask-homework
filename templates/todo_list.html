@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row justify-content-md-center">
+    <div class="col-8">
+      <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h4 class="border-bottom pb-2 mb-0">Todo list</h4>
+        {% for todo in todo_list %}
+          <div class="text-body-secondary pt-3">
+            <div class="pb-3 mb-0 lh-sm border-bottom">
+              <div class="d-flex justify-content-between">
+                <strong class="d-block text-gray-dark">
+                  {% if todo.status %}
+                    <span class="text-success">Done</span>
+                  {% else %}
+                    <span class="text-danger">Not done</span>
+                  {% endif %}
+                  {{ todo.id }} - {{ todo.title }}
+                </strong>
+                <div>
+                  <form class="d-inline" method="post" action="{{ url_for("todo_change_status", pk=todo.id) }}">
+                    <button type="submit" class="border-0 badge bg-success-subtle text-danger-emphasis rounded-pill">Change
+                      status
+                    </button>
+                  </form>
+                  <form class="d-inline" method="post" action="{{ url_for("todo_delete", pk=todo.id) }}">
+                    <button type="submit" class="border-0 badge bg-danger-subtle text-danger-emphasis rounded-pill">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <p>
+                {{ todo.description }}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+
+        <form class="mt-4" method="post" action="{{ url_for("todo_create") }}">
+          <div class="mb-3">
+            <label for="FormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" id="FormControlInput1" name="title"
+                   placeholder="Some funny name">
+          </div>
+          <div class="mb-3">
+            <label for="FormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" id="FormControlTextarea1" name="description" rows="2"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm">Create</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
