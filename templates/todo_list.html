@@ -23,9 +23,11 @@
                       status
                     </button>
                   </form>
-                  <a class="badge bg-danger-subtle text-danger-emphasis rounded-pill" href="#">
-                    Delete
-                  </a>
+                  <form class="d-inline" method="post" action="{{ url_for("todo_delete", pk=todo.id) }}">
+                    <button type="submit" class="border-0 badge bg-danger-subtle text-danger-emphasis rounded-pill">
+                      Delete
+                    </button>
+                  </form>
                 </div>
               </div>
               <p>
