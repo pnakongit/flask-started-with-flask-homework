@@ -46,24 +46,16 @@ def todo_create() -> Response:
 @app.route("/tasks/<int:pk>/change_status", methods=["POST"])
 def todo_change_status(pk: int) -> Response:
     if request.method == "POST":
-        for task in fake_db:
-            if task["id"] == pk:
-                task["status"] = not task["status"]
-                break
-        else:
-            abort(404)
+        task = get_task_or_404(pk)
+        task["status"] = not task["status"]
     return redirect(url_for("todo_list"))
 
 
 @app.route("/tasks/<int:pk>/delete", methods=["POST"])
 def todo_delete(pk: int) -> Response:
     if request.method == "POST":
-        for task in fake_db:
-            if task["id"] == pk:
-                fake_db.remove(task)
-                break
-        else:
-            abort(404)
+        task = get_task_or_404(task_id=pk)
+        fake_db.remove(task)
     return redirect(url_for("todo_list"))
 
 
