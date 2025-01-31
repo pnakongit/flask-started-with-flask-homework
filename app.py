@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, abort
 from flask.wrappers import Response
+from werkzeug.exceptions import NotFound
 
 from fake_db import fake_db
 
@@ -57,6 +58,11 @@ def todo_delete(pk: int) -> Response:
         task = get_task_or_404(task_id=pk)
         fake_db.remove(task)
     return redirect(url_for("todo_list"))
+
+
+@app.errorhandler(NotFound)
+def handle_not_found(e: NotFound) -> tuple[str, int]:
+    return render_template("not_found.html"), e.code
 
 
 if __name__ == "__main__":
