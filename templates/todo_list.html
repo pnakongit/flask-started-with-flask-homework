@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row justify-content-md-center">
+    <div class="col-8">
+      <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h4 class="border-bottom pb-2 mb-0">Todo list</h4>
+        {% for todo in todo_list %}
+          <div class="text-body-secondary pt-3">
+            <div class="pb-3 mb-0 lh-sm border-bottom">
+              <div class="d-flex justify-content-between">
+                <strong class="d-block text-gray-dark">
+                  {{ todo.id }} - {{ todo.title }}
+                </strong>
+                <div>
+                  <a class="badge bg-success-subtle text-danger-emphasis rounded-pill" href="#">Change status</a>
+                  <a class="badge bg-danger-subtle text-danger-emphasis rounded-pill" href="#">Delete</a>
+                </div>
+              </div>
+              <p>
+                {{ todo.description }}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+
+        <form class="mt-4" method="POST">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Some funny name">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" id="eFormControlTextarea1" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
