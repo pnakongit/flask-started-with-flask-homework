@@ -30,6 +30,7 @@ def todo_create() -> Response:
             "id": get_id_for_create_todo(),
             "title": request.form["title"],
             "description": request.form["description"],
+            "status": False,
         }
         fake_db.append(new_task)
     return redirect(url_for("todo_list"))
@@ -48,8 +49,15 @@ def todo_change_status(pk: int) -> Response:
 
 
 @app.route("/tasks/<int:pk>/delete", methods=["POST"])
-def todo_delete(pk: int) -> str:
-    return ""
+def todo_delete(pk: int) -> Response:
+    if request.method == "POST":
+        for task in fake_db:
+            if task["id"] == pk:
+                fake_db.remove(task)
+                break
+        else:
+            abort(404)
+    return redirect(url_for("todo_list"))
 
 
 if __name__ == "__main__":
