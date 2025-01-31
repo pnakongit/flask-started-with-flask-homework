@@ -13,6 +13,13 @@ def get_id_for_create_todo() -> int:
     return todo_id + 1
 
 
+def get_task_or_404(task_id: int) -> dict:
+    for task in fake_db:
+        if task["id"] == task_id:
+            return task
+    abort(404)
+
+
 @app.route("/hello-world")
 def hello_world() -> str:
     return "<h1>Hello, World!</h1>"
